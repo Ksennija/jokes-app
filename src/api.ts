@@ -1,25 +1,21 @@
 import axios from "axios";
-import { User } from "./types/userType";
 
 export const api = axios.create({
-    baseURL: "https://www.melivecode.com/api/",
+    baseURL: "https://official-joke-api.appspot.com",
     withCredentials: false,
   });
   
   export const fetchUsers = () => {
     const allUsers = api
-      .get("/users")
+      .get("/random_ten")
       .then((response) => {
-        // we get the user data, let's return it
+        console.log(response.data);
         return response.data;
       })
       .catch((err) => {
         console.error(err);
-        // There is an error, we must return empty array
         return [];
       });
-  
-    console.log(allUsers);
-  
+    
     return allUsers;
   };
