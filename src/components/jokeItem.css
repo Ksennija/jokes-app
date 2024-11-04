@@ -1,0 +1,35 @@
+.joke-item {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.joke-type {
+    text-transform: capitalize;
+    font-size: small;
+    padding-bottom: 20px;
+}
+
+.joke-setup, .joke-punchline {
+    font-size: large;
+    padding-bottom: 10px;
+}
+
+.joke-setup {
+    font-weight: bold;
+}
+
+.button-show {
+    width: 20%;
+    border-color: blue;
+    color: blue;
+    border-radius: 6px;
+    border-width: thin;
+    background-color: white;
+    padding: 5px;
+}

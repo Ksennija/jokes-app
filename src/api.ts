@@ -5,8 +5,8 @@ export const api = axios.create({
     withCredentials: false,
   });
   
-  export const fetchUsers = () => {
-    const allUsers = api
+  export const fetchJokes = () => {
+    const allJokes = api
       .get("/random_ten")
       .then((response) => {
         return response.data;
@@ -16,5 +16,5 @@ export const api = axios.create({
         return [];
       });
     
-    return allUsers;
+    return allJokes;
   };
