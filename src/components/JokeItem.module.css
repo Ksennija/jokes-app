@@ -1,4 +1,4 @@
-.joke-item {
+.jokeItem {
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -9,23 +9,23 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.joke-type {
+.jokeType {
     text-transform: capitalize;
     font-size: small;
     padding-bottom: 20px;
 }
 
-.joke-setup, .joke-punchline {
+.jokeSetup, .jokePunchline {
     display: block;
     font-size: large;
     padding-bottom: 10px;
 }
 
-.joke-setup {
+.jokeSetup {
     font-weight: bold;
 }
 
-.button-show {
+.btnShow {
     display: block;
     width: 20%;
     border-color: blue;
