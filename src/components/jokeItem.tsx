@@ -16,19 +16,17 @@ export const JokeItem = ({ joke }: Props) => {
     <li key={joke.id} className="joke-item">
       <div className="joke-type">{joke.type}</div>
       <div className="joke-setup">{joke.setup}</div>
-      <div
-        className="joke-punchline"
-        style={{ display: displayPunchline ? "block" : "none" }}
-      >
-        {joke.punchline}
+      <div className="joke-punchline">
+        <span className={!displayPunchline ? "hidden" : "active"}>
+          {joke.punchline}
+        </span>
+        <button
+          className={"button-show " + (displayPunchline ? "hidden" : "active")}
+          onClick={handleShowClick}
+        >
+          Show
+        </button>
       </div>
-      <button
-        className="button-show"
-        style={{ display: !displayPunchline ? "block" : "none" }}
-        onClick={handleShowClick}
-      >
-        Show
-      </button>
     </li>
   );
 };

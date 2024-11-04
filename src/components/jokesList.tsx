@@ -1,5 +1,3 @@
-//import { useState } from "react";
-import { useState } from "react";
 import { Joke } from "../types/jokeType";
 import { JokeItem } from "./jokeItem";
 
