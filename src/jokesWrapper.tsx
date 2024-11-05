@@ -29,29 +29,43 @@ export const JokesWrapper = () => {
       renderAfterCalled.current = true;
       setNeedsRefresh(false);
     }
-  }, [needsRefresh]);
+  }, [needsRefresh, showLibrary]);
 
   const handleReloadClick = () => {
     renderAfterCalled.current = false;
     setNeedsRefresh(true);
   };
 
+  const handleNewJokesClick = () => {
+    renderAfterCalled.current = false;
+    setShowLibrary(false);
+  };
+
+  const handleLibraryClick = () => {
+    renderAfterCalled.current = false;
+    setShowLibrary(true);
+  };
+
   return (
     <>
       <div className={styles.btnGroup}>
         <button
+          disabled={!showLibrary}
           className={classnames(styles.left, {
             [styles.selected]: !showLibrary,
           })}
+          onClick={handleNewJokesClick}
         >
-          New jokes
+          <div className={styles.text}>New jokes</div>
         </button>
         <button
+          disabled={showLibrary}
           className={classnames(styles.right, {
             [styles.selected]: showLibrary,
           })}
+          onClick={handleLibraryClick}
         >
-          Library
+          <div className={styles.text}>Library</div>
         </button>
       </div>
       <JokesList jokes={randomJokes} />

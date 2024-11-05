@@ -10,7 +10,7 @@
     font-weight: bold;
     padding: 10px 24px;
     cursor: pointer;
-    width: 40%;  
+    width: 40%;
 }
   
 .btnGroup button.selected {
@@ -26,18 +26,8 @@
 .btnGroup button.left {
     border-radius: 10px 0 0 10px;  
 }
-
-.btnGroup button:not(:last-child) {
-    border-right: none;
-}
   
-.btnGroup:after {
-    content: "";
-    clear: both;
-    display: table;
-}
-  
-.btnGroup button:hover {
+.btnGroup button:hover:not([disabled]) {
     background-color: darkblue;
     color: white;
 }
