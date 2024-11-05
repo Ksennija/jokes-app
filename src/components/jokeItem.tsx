@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Joke } from "../types/Joke";
 import styles from "./JokeItem.module.css";
+import classnames from "classnames";
 
 export type Props = {
   joke: Joke;
@@ -17,15 +18,19 @@ export const JokeItem = ({ joke }: Props) => {
       <div className={styles.jokeType}>{joke.type}</div>
       <div className={styles.jokeSetup}>{joke.setup}</div>
       <div className={styles.jokePunchline}>
-        <span className={!displayPunchline ? styles.hidden : styles.active}>
+        <span
+          className={classnames({
+            [styles.hidden]: !displayPunchline,
+            [styles.active]: displayPunchline,
+          })}
+        >
           {joke.punchline}
         </span>
         <button
-          className={
-            styles.btnShow +
-            " " +
-            (displayPunchline ? styles.hidden : styles.active)
-          }
+          className={classnames(styles.btnShow, {
+            [styles.hidden]: displayPunchline,
+            [styles.active]: !displayPunchline,
+          })}
           onClick={handleShowClick}
         >
           Show

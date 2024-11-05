@@ -2,8 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import { fetchJokes } from "./api";
 import { Joke } from "./types/Joke";
 import { JokesList } from "./components/JokesList";
-
+import classnames from "classnames";
 import styles from "./JokesWrapper.module.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 
 export const JokesWrapper = () => {
   const jokesAmmount = 4;
@@ -13,6 +16,7 @@ export const JokesWrapper = () => {
   const renderAfterCalled = useRef(false);
 
   const [needsRefresh, setNeedsRefresh] = useState(false);
+  const [showLibrary, setShowLibrary] = useState(false);
 
   useEffect(() => {
     async function fetchRandomeJokes() {
@@ -35,18 +39,24 @@ export const JokesWrapper = () => {
   return (
     <>
       <div className={styles.btnGroup}>
-        <button className={styles.left + " " + styles.selected}>
+        <button
+          className={classnames(styles.left, {
+            [styles.selected]: !showLibrary,
+          })}
+        >
           New jokes
         </button>
-        <button className={styles.right}>Library</button>
+        <button
+          className={classnames(styles.right, {
+            [styles.selected]: showLibrary,
+          })}
+        >
+          Library
+        </button>
       </div>
       <JokesList jokes={randomJokes} />
       <button className={styles.btnReload} onClick={handleReloadClick}>
-        <img
-          className={styles.icon}
-          alt="Reload"
-          src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"
-        />
+        <FontAwesomeIcon icon={faRotateRight} className={styles.icon} />
       </button>
     </>
   );
