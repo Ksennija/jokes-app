@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { JokesWrapper } from "./jokesWrapper";
+import { JokesWrapper } from "./JokesWrapper";
 
 function App() {
   return (

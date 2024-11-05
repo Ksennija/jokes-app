@@ -3,7 +3,7 @@ import { fetchJokes } from "./api";
 import { Joke } from "./types/Joke";
 import { JokesList } from "./components/JokesList";
 
-import "./jokesWrapper.css";
+import styles from "./JokesWrapper.module.css";
 
 export const JokesWrapper = () => {
   const jokesAmmount = 4;
@@ -34,14 +34,16 @@ export const JokesWrapper = () => {
 
   return (
     <>
-      <div className="btn-group">
-        <button className="left selected">New jokes</button>
-        <button className="right">Library</button>
+      <div className={styles.btnGroup}>
+        <button className={styles.left + " " + styles.selected}>
+          New jokes
+        </button>
+        <button className={styles.right}>Library</button>
       </div>
       <JokesList jokes={randomJokes} />
-      <button className="btn-reload" onClick={handleReloadClick}>
+      <button className={styles.btnReload} onClick={handleReloadClick}>
         <img
-          className="icon"
+          className={styles.icon}
           alt="Reload"
           src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"
         />
