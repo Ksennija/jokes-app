@@ -10,65 +10,75 @@ import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 
 export const JokesWrapper = () => {
   const jokesAmmount = 4;
-  const [randomJokes, setRandomJokes] = useState<Joke[]>([]);
 
   // This constant helps to avoid double reload of the page in the development mode
   const renderAfterCalled = useRef(false);
 
-  const [needsRefresh, setNeedsRefresh] = useState(false);
-  const [showLibrary, setShowLibrary] = useState(false);
+  const [randomJokes, setRandomJokes] = useState<Joke[]>([]);
+  const [bookmarkedJokes, setBookmarkedJokes] = useState<Joke[]>([]);
+
+  const [showBookmarked, setShowBookmarked] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    async function fetchRandomeJokes() {
+    async function fetchAllJokes() {
       const fetchedJokes = await fetchJokes();
       setRandomJokes(getRandomJokes(fetchedJokes, jokesAmmount));
     }
 
     if (!renderAfterCalled.current) {
-      fetchRandomeJokes();
+      fetchAllJokes();
       renderAfterCalled.current = true;
-      setNeedsRefresh(false);
     }
-  }, [needsRefresh, showLibrary]);
+  }, [refresh]);
 
   const handleReloadClick = () => {
     renderAfterCalled.current = false;
-    setNeedsRefresh(true);
+    setRefresh(!refresh);
   };
 
   const handleNewJokesClick = () => {
-    renderAfterCalled.current = false;
-    setShowLibrary(false);
+    setShowBookmarked(false);
   };
 
   const handleLibraryClick = () => {
-    renderAfterCalled.current = false;
-    setShowLibrary(true);
+    setShowBookmarked(true);
+  };
+
+  const onJokeBookmarked = (jokeId: Joke["id"]) => {
+    const bookmarkedJoke = randomJokes.find((it) => it.id === jokeId)!;
+    setRandomJokes(randomJokes.filter((joke) => joke.id !== jokeId));
+    setBookmarkedJokes([...bookmarkedJokes, bookmarkedJoke]);
+    console.log(bookmarkedJokes);
   };
 
   return (
     <>
       <div className={styles.btnGroup}>
         <button
-          disabled={!showLibrary}
+          disabled={!showBookmarked}
           className={classnames(styles.left, {
-            [styles.selected]: !showLibrary,
+            [styles.selected]: !showBookmarked,
           })}
           onClick={handleNewJokesClick}
         >
           <div className={styles.text}>New jokes</div>
         </button>
         <button
-          disabled={showLibrary}
+          disabled={showBookmarked}
           className={classnames(styles.right, {
-            [styles.selected]: showLibrary,
+            [styles.selected]: showBookmarked,
           })}
           onClick={handleLibraryClick}
         >
           <div className={styles.text}>Library</div>
         </button>
       </div>
-      <JokesList jokes={randomJokes} />
+      <JokesList
+        jokes={showBookmarked ? bookmarkedJokes : randomJokes}
+        onBookmarked={onJokeBookmarked}
+        showBookmarked={showBookmarked}
+      />
       <button className={styles.btnReload} onClick={handleReloadClick}>
         <FontAwesomeIcon icon={faRotateRight} className={styles.icon} />
       </button>

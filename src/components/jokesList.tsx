@@ -5,12 +5,26 @@ import styles from "./JokesList.module.css";
 
 export type Props = {
   jokes: Joke[];
+  onBookmarked: (id: Joke["id"]) => void;
+  showBookmarked: boolean;
 };
-export const JokesList = ({ jokes }: Props) => {
+
+export const JokesList: React.FC<Props> = ({
+  jokes,
+  onBookmarked,
+  showBookmarked,
+}) => {
   return (
     <ul className={styles.jokesList}>
-      {jokes.map((j) => {
-        return <JokeItem key={j.id} joke={j}></JokeItem>;
+      {jokes.map((joke) => {
+        return (
+          <JokeItem
+            key={joke.id}
+            joke={joke}
+            onBookmarked={onBookmarked}
+            showBookmarked={showBookmarked}
+          />
+        );
       })}
     </ul>
   );
